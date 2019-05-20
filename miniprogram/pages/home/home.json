@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "日记",
+  "navigationBarBackgroundColor": "#fed6e3",
+  "usingComponents": {
+    "calendar": "plugin://calendar/calendar"
+  }
+}

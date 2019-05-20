@@ -1,0 +1,32 @@
+<!--pages/home/home.wxml-->
+<scroll-view class='home-y' style="height: 100%;"  scroll-y bindscrolltolower='scrollBottom' lower-threshold="100">
+  <view class='calender-wrap'>
+    <calendar calendar-style="calendar" header-style="calendar-header" board-style="calendar-board" days-color="{{dayStyle}}"   weeks-type="cn" binddayClick="dayClick" />
+  </view>
+  <view wx:for="{{ homeList }}" wx:key="{{ item._id }}" class="card-wrap">
+    <view class="cart-link clearfix">
+      <view class='fl user-wrap'>
+        <image mode="aspectFill" class='user-log' src='{{ item.touristsHead }}'></image>
+      </view>
+      <view class='fl cart-content'>
+        <view class='name'>{{ item.touristsNickname }}</view>
+        <view class='msg'>
+          {{ item.saySome }}
+        </view>
+        <view class="msg-img clearfix">
+          <view wx:for="{{ item.brandImgList }}" wx:for-index="i" wx:key="{{ item.requestID }}" wx:for-item="subItem" class="img-link fl">
+            <image bindtap="previewImage" data-itemlist='{{ item.brandImgList }}' data-index='{{ i }}' class="img-item" mode="aspectFill" src='{{ subItem.imgUrl }}'></image>
+          </view>
+        </view>
+        <view class="site">
+          <text class='iconfont iconicon_signin_line'></text> {{ item.location }}</view>
+      </view>
+    </view>
+  </view>
+</scroll-view>
+
+<view class='home-add-mood' bindtap='addMoodSelf'>
+  <text class='bg-color'>
+    <text class='iconfont iconicon_add btn-add-mood'></text>
+  </text>
+</view>

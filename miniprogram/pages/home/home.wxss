@@ -1,0 +1,123 @@
+/* pages/home/home.wxss */
+
+page {
+  height: 100%;
+}
+
+.home-y::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+.calender-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.calendar {
+  padding-top: 10px; /*上内边距为10px*/
+  color: #38acff;
+  background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+  background-size: cover;
+}
+
+.card-wrap {
+  padding-top: 20rpx;
+  width: 100%;
+  height: auto;
+}
+
+.cart-link {
+  padding: 20rpx;
+  width: 100%;
+  height: auto;
+  background-color: #fff;
+  border-radius: 10rpx;
+}
+
+.cart-link .user-wrap {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 10rpx;
+}
+
+.cart-link .user-wrap .user-log {
+  width: 100%;
+  height: 100%;
+  border-radius: 10rpx;
+}
+
+.cart-link .cart-content {
+  padding-left: 20px;
+  width: calc(100% - 100rpx);
+}
+
+.cart-link .cart-content .name {
+  padding-bottom: 10rpx;
+  color: #3498db;
+  font-weight: bold;
+}
+
+.cart-link .cart-content .msg {
+  padding-bottom: 10rpx;
+  height: auto;
+  font-size: 32rpx;
+}
+
+.cart-link .cart-content msg-img {
+  height: auto;
+}
+
+.cart-link .cart-content .img-link {
+  margin-right: 10rpx;
+  margin-bottom: 10rpx;
+  width: calc((100% - 20rpx)/3);
+  height: 200rpx;
+}
+
+.cart-link .cart-content .img-link:nth-child(3n) {
+  margin-right: 0;
+}
+
+.cart-link .cart-content .img-item {
+  width: 100%;
+  height: 100%;
+}
+
+.cart-link .cart-content .site {
+  font-size: 28rpx;
+  color: #3498db;
+}
+
+.cart-link .cart-content .site .icon {
+  vertical-align: middle;
+}
+
+.home-add-mood {
+  position: fixed;
+  bottom: 30rpx;
+  right: 30rpx;
+  height: 122rpx;
+  width: 122rpx;
+  border: 6rpx solid rgba(232, 231, 231, 0.5);
+  border-radius: 50%;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.home-add-mood .bg-color {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  line-height: 110rpx;
+  background-image: radial-gradient(circle at 100% 50%, #5bd0ff, #59d0ff 49%, #34a2fe);
+}
+
+.btn-add-mood {
+  font-size: 50rpx;
+  color: #fff;
+}

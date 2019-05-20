@@ -1,0 +1,8 @@
+<!--pages/login/login.wxml-->
+<view class='login-main'>
+<image class='login-image' src='../../images/login-logo.jpg'></image>
+<view class='login-12348fawang'>朋友的日志</view>
+<image class='login-tit' ></image>
+<button class='login-btn' bindgetuserinfo='bindGetUserInfo' open-type='getUserInfo'>微信授权并登录</button>
+<view class='login-tip'wx:if='{{!iffail}}'>· 获得你的公开信息（头像、昵称）</view>
+</view>

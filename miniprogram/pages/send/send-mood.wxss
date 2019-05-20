@@ -1,0 +1,73 @@
+/* pages/send/send-mood.wxss */
+
+.send-hd {
+  padding-top: 20rpx;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  padding-bottom: 5rpx;
+  line-height: 60rpx;
+  font-size: 32rpx;
+  background-color: #fff;
+}
+
+.send-hd .other-button-hover {
+  opacity: 0.8;
+}
+
+.send-msg {
+  padding-top: 10rpx;
+  background-color: #fff;
+}
+
+.send-msg .send-area {
+  padding: 10rpx 20rpx;
+  width: 100%;
+  font-size: 32rpx;
+}
+
+.seed-uploader {
+  padding: 20rpx;
+  background-color: #fff;
+}
+
+.send-mood-pic {
+  margin-bottom: 10rpx;
+  margin-right: 10rpx;
+  position: relative;
+  width: calc((100% - 20rpx)/3);
+  padding: calc((100% - 20rpx)/6) 0;
+  background-color: #eee;
+  border-radius: 4rpx;
+  overflow: hidden;
+}
+
+.send-mood-pic .add-icon {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 80rpx;
+  height: 80rpx;
+  margin: auto;
+  text-align: center;
+  line-height: 80rpx;
+  font-size: 60rpx;
+}
+
+.send-mood-pic .pic {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+}
+.send-mood-pic .pic .pic-img {
+  width: 100%;
+  height: 100%;
+}
+
+.seed-uploader .send-mood-pic:nth-child(3n) {
+  margin-right: 0;
+}
+

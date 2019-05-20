@@ -1,0 +1,47 @@
+/* pages/login/login.wxss */
+page {
+  background-color: #fff;
+}
+.login-main {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  text-align: center;  
+  font-size: 0;
+}
+.login-image {
+  width: 180rpx;
+  height: 180rpx;
+}
+.login-tit {
+  width: 360rpx;
+  height: 100rpx;
+  margin-bottom: 320rpx;
+}
+.login-12348fawang {
+  padding: 30rpx 0 15rpx;
+  font-size: 48rpx;
+  color: #3b4349;
+}
+.login-tip {
+  color: #3b4349;
+}
+.login-tip {
+  margin-top: 20rpx;
+  font-size: 26rpx;
+  color: #888;
+}
+.login-fail {
+  color: #3b97f8;
+}
+.login-btn {
+  width: 450rpx;
+  height: 100rpx;
+  border-radius: 50rpx;
+  line-height: 100rpx;
+  font-size: 36rpx;
+  color: #fff;
+  background-color: #4bb47a;
+}

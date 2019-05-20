@@ -1,0 +1,32 @@
+<!--pages/send/send-mood.wxml-->
+<view class='send-hd border-bottom'>
+  <view class='clearfix'>
+    <text class='fl'>取消</text>
+    <button bindtap='sendMood' class='fr' disabled='{{ sendFlag }}'  type="primary" size="mini" hover-class="other-button-hover">
+      发表
+    </button>
+  </view>
+</view>
+<view class='send-msg'>
+  <textarea style='min-height: 160rpx;' bindinput="sendMsg"  class='send-area' placeholder="这一刻你想说点啥..." auto-focus auto-height/>
+</view>
+<!-- 上传图片 -->
+<view class='seed-uploader clearfix'>
+  <view wx:for="{{ brandImgList }}" wx:key="{{ item.requestID }}" class='send-mood-pic fl'>
+   <view class='pic'>
+    <image class='pic-img' src='{{ item.imgUrl }}' mode="aspectFill"></image>
+   </view>
+  </view>
+  <view class='send-mood-pic fl' bindtap="doUpload">
+    <text class='iconfont iconicon_add add-icon'></text>
+  </view>
+</view>
+<view class='cos-navgt clearfix active'>
+  <view class='fl navgt-l'>
+    <text class='iconfont iconicon_signin_line'></text>
+  </view>
+  <view class='fr navgt-r border-top border-bottom'>
+    <input class='navgt-r-input' placeholder='地理位置' value='{{ address }}' disabled></input>
+    <text class='iconfont iconright icon-arrows'></text>
+  </view>
+</view>
