@@ -94,6 +94,15 @@ page {
   vertical-align: middle;
 }
 
+.cart-link .easy-like {
+  margin-bottom: 10rpx;
+  height: 60rpx;
+}
+
+.cart-link .easy-like .icon-like {
+  font-size: 38rpx;
+}
+
 .home-add-mood {
   position: fixed;
   bottom: 30rpx;

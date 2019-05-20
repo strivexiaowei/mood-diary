@@ -163,7 +163,8 @@ Page({
         location: _that.data.address,
         brandImgList: _that.data.brandImgList,
         saySome: _that.data.saySome,
-        createTime: db.serverDate() //添加该字段
+        createTime: db.serverDate(), //添加该字段
+        easyLike: []
       },
       success(res) {
         wx.switchTab({

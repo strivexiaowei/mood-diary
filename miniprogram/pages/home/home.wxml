@@ -18,10 +18,17 @@
             <image bindtap="previewImage" data-itemlist='{{ item.brandImgList }}' data-index='{{ i }}' class="img-item" mode="aspectFill" src='{{ subItem.imgUrl }}'></image>
           </view>
         </view>
+        <view class='easy-like'>
+          <text bindtap='easyLike' data-_openid='{{ item._openid }}' data-_id='{{ item._id }}' class='iconfont iconcanyu icon-like'>  {{ item.easyLike.length }}</text>
+          <!-- <text>{{ item.createTime }}</text> -->
+        </view>
         <view class="site">
           <text class='iconfont iconicon_signin_line'></text> {{ item.location }}</view>
       </view>
     </view>
+  </view>
+  <view class='footer' style='height: 200rpx;'>
+  
   </view>
 </scroll-view>
 

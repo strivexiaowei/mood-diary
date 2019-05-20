@@ -1,6 +1,7 @@
 // pages/home/home.js
 const db = wx.cloud.database();
 const mood = db.collection('mood');
+const _ = db.command
 var app = getApp();
 Page({
 
@@ -12,7 +13,8 @@ Page({
       { month: 'current', day: new Date().getDate(), color: 'white', background: '#AAD4F5' },
       { month: 'current', day: new Date().getDate(), color: 'white', background: '#AAD4F5' }
     ],
-    homeList: []
+    homeList: [],
+    openid: ''
   },
   dayClick: function (event) {
     let clickDay = event.detail.day;
@@ -41,14 +43,18 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+
     wx.cloud.callFunction({
       name: 'orderby',
-      data:{},
+      data: {},
       success: res => {
-        console.log(res,'hehehehehe')
+        console.log(res, 'hehehehehe')
       }
     })
     let _that = this;
+    _that.setData({
+      openid: app.globalData.openid
+    })
     mood.where({}).get({
       success(res) {
         console.log(res);
@@ -121,5 +127,35 @@ Page({
    */
   scrollBottom() {
     console.log('hehe')
+  },
+  easyLike(e) {
+    let { _id, _openid } = e.currentTarget.dataset;
+    mood.where({
+      _id
+    }).get({
+      success: res => {
+        let { easyLike } = res.data[0];
+        let idx = easyLike.findIndex(e => e === _openid);
+        if (idx === -1) {
+          mood.doc(_id).update({
+            data: {
+              easyLike: _.push(_openid)
+            },
+            success: res => {
+              console.log(res);
+            }
+          })
+        } else {
+          mood.doc(_id).update({
+            data: {
+              easyLike: easyLike.splice(idx, 1)
+            },
+            success: res => {
+              console.log(res);
+            }
+          })
+        }
+      }
+    })
   }
 })
