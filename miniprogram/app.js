@@ -31,15 +31,18 @@ App({
         }
       }
     })
-    wx.cloud.callFunction({
-      name: 'login',
-      data: {},
-      success: res => {
-        _that.globalData.openid = res.result.openid
-      },
-      fail: err => {
-      }
-    })
+    if (!this.globalData.openid) {
+      console.log('hehe')
+      wx.cloud.callFunction({
+        name: 'login',
+        data: {},
+        success: res => {
+          wx.setStorageSync('_openid', res.result.openid);
+        },
+        fail: err => {
+        }
+      })
+    }
   },
   onLaunch: function () {
 
@@ -54,6 +57,5 @@ App({
   },
   globalData() {
     userInfo: null;
-    openid: '';
   }
 })
