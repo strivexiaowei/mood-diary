@@ -1,0 +1,40 @@
+<image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1558525133121&di=ead4b7416b983ebefb1f9e8a09356b08&imgtype=0&src=http%3A%2F%2Fcdn.moji002.com%2Fimages%2Fsimgs%2F2017%2F07%2F06%2F14992904410.15854600.1615_ios.jpg" class="bg"></image>
+<view class="container">
+  <view class="nowWeather">
+    <view class="city w">{{city}} {{district}}</view>
+    <view class="road w">{{street}}</view>
+    <view class="temp w b">{{tmp}}°</view>
+    <view class="weather w">{{txt}} | 空气 {{qlty}}</view>
+  </view>
+ 
+  <view class="weahterDetail">
+    <view class="">
+      <view class="w center">{{dir}}</view>
+      <view wx:if="{{sc == '微风'}}" class="w b center f50">微风</view>
+      <view wx:else class="w b center f50">{{sc}}级</view>
+    </view>
+    <view class="l"></view>
+    <view class="">
+      <view class="w center">相对湿度</view>
+      <view class="w b center f50">{{hum}}%</view>
+    </view>
+    <view class="l"></view>
+    <view class="">
+      <view class="w center">体感温度</view>
+      <view class="w b center f50">{{fl}}°</view>
+    </view>
+  </view>
+ 
+</view>
+ 
+ 
+<view wx:for="{{daily_forecast}}" wx:for-index="i" wx:for-item="item">
+  <view class="hor forcast">
+    <view class="center">{{day[i]}}</view>
+    <view class="hor">
+      <image class="img" src="../../assets/icons/{{item.cond.code_d}}.png"></image>
+      <view class="center">{{item.cond.txt_d}}|{{qlty}}</view>
+    </view>
+    <view class="center">{{item.tmp.min}}°/ {{item.tmp.max}}°</view>
+  </view>
+</view>

@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/weather/weather",
     "pages/home/home",
     "pages/send/send-mood",
     "pages/login/login",
@@ -28,6 +29,12 @@
         "text": "首页",
         "iconPath": "./images/home1.png",
         "selectedIconPath": "./images/home.png"
+      },
+      {
+        "pagePath": "pages/weather/weather",
+        "text": "天气",
+        "iconPath": "./images/weather1.png",
+        "selectedIconPath": "./images/weather.png"
       },
       {
         "pagePath": "pages/user/user",

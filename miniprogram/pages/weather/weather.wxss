@@ -1,0 +1,79 @@
+/**index.wxss**/
+ 
+/**common css**/
+page {
+  background-color: #fff;
+}
+.w{
+  color: white;
+}
+.b{
+  font-weight: bold;
+}
+ 
+.l{
+  border: 1rpx solid #fff;
+}
+ 
+.center{
+  text-align: center;
+  margin: auto 0;
+}
+ 
+.hor{
+  display: flex;
+}
+ 
+.f50{
+  font-size: 50rpx;
+}
+ 
+/**index css**/
+ 
+ 
+.bg {
+  width: 100%;
+  height: 700rpx;
+}
+ 
+.temp{
+  font-size: 170rpx;
+}
+ 
+.container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  height: 700rpx;
+  display: block;
+}
+ 
+.nowWeather{
+  padding: 60rpx;
+}
+ 
+.weahterDetail{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  position: absolute;
+  bottom: 50rpx;
+}
+ 
+.forcast{
+  padding: 30rpx;
+  margin-left: 16rpx;
+  margin-right: 16rpx;
+  border-bottom: 1rpx solid #eee;
+  justify-content: space-around;
+}
+ 
+.img{
+  width: 60rpx;
+  height: 60rpx;
+  margin-right: 16rpx;
+}
