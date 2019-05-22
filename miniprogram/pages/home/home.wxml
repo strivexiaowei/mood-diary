@@ -1,9 +1,10 @@
 <!--pages/home/home.wxml-->
+<wxs src="../../utils/getDateDiff.wxs" module="getDateDiff" />
 <scroll-view class='home-y' style="height: 100%;"  scroll-y bindscrolltolower='scrollBottom' lower-threshold="100">
   <view class='calender-wrap'>
     <calendar calendar-style="calendar" header-style="calendar-header" board-style="calendar-board" days-color="{{dayStyle}}"   weeks-type="cn" binddayClick="dayClick" />
   </view>
-  <view wx:for="{{ homeList }}" wx:key="{{ item._id }}" class="card-wrap">
+  <view wx:for="{{ homeList }}" wx:key="{{ item._id }}" wx:for-index="j" class="card-wrap">
     <view class="cart-link clearfix">
       <view class='fl user-wrap'>
         <image mode="aspectFill" class='user-log' src='{{ item.touristsHead }}'></image>
@@ -19,8 +20,8 @@
           </view>
         </view>
         <view class='easy-like'>
-          <text bindtap='easyLike' data-_openid='{{ item._openid }}' data-_id='{{ item._id }}' class='iconfont iconcanyu icon-like'>  {{ item.easyLike.length }}</text>
-          <!-- <text>{{ item.createTime }}</text> -->
+          <text bindtap='easyLike' data-index='{{ j }}' data-_id='{{ item._id }}' class='iconfont icon-like {{ item.isLike }}'>  {{ item.easyLike.length }}</text>
+          <text class='fr'>{{ getDateDiff.getDateDiff(item.createTime) }}</text>
         </view>
         <view class="site">
           <text class='iconfont iconicon_signin_line'></text> {{ item.location }}</view>

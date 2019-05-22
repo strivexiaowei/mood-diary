@@ -14,7 +14,8 @@ Page({
       { month: 'current', day: new Date().getDate(), color: 'white', background: '#AAD4F5' }
     ],
     homeList: [],
-    openid: ''
+    openid: '',
+    easyFlag: false
   },
   dayClick: function (event) {
     let clickDay = event.detail.day;
@@ -29,7 +30,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-   
+
   },
 
   /**
@@ -55,15 +56,7 @@ Page({
     _that.setData({
       openid
     })
-    mood.where({}).get({
-      success(res) {
-        console.log(res);
-        let { data } = res;
-        _that.setData({
-          homeList: data.reverse()
-        })
-      }
-    })
+    _that.queryHomeList({});
   },
 
   /**
@@ -129,11 +122,16 @@ Page({
     console.log('hehe')
   },
   easyLike(e) {
-    let { _id } = e.currentTarget.dataset;
+    let { _id, index } = e.currentTarget.dataset;
     let _that = this;
     let _openid = _that.data.openid;
-    console.log(_id)
-    console.log(_openid + '_openid');
+    let arrList = _that.data.homeList;
+    if (_that.data.easyFlag) {
+      return;
+    }
+    _that.setData({
+      easyFlag: true
+    })
     mood.where({
       _id
     }).get({
@@ -141,30 +139,79 @@ Page({
         let { easyLike } = res.data[0];
         console.log(easyLike);
         let idx = easyLike.findIndex(e => {
-          console.log(e,'e');
           return e === _openid
         });
         console.log(idx);
         if (idx === -1) {
-         console.log('baici')
-         mood.doc(_id).update({
-           data: {
-             easyLike: _.push(_openid)
-           },
-           success: res => {
-             console.log('hehehe',res);
-           }
-         })
-        } else {
+          console.log('baici')
           mood.doc(_id).update({
             data: {
-              easyLike: easyLike.splice(idx,1)
+              easyLike: _.push(_openid)
             },
             success: res => {
-              console.log('hehehe', res);
+              let { updated } = res.stats;
+              arrList[index].easyLike.push(_openid);
+              arrList[index].isLike = 'iconzhichi';
+              if (updated === 1) {
+                _that.setData({
+                  homeList: arrList
+                })
+              }
+            },
+            complete: res => {
+              _that.setData({
+                easyFlag: false
+              })
+            }
+          })
+        } else {
+          easyLike.splice(idx, 1);
+          mood.doc(_id).update({
+            data: {
+              easyLike
+            },
+            success: res => {
+              let { updated } = res.stats;
+              arrList[index].easyLike = easyLike;
+              arrList[index].isLike = 'iconcanyu';
+              if (updated === 1) {
+                _that.setData({
+                  homeList: arrList
+                })
+              }
+            },
+            complete: res => {
+              _that.setData({
+                easyFlag: false
+              })
             }
           })
         }
+      }
+    })
+  },
+  /**
+   * 查询列表
+   */
+  queryHomeList(obj) {
+    let _that = this;
+    let _openid = _that.data.openid;
+    mood.where(obj).get({
+      success(res) {
+        console.log(res);
+        let { data } = res;
+       console.log(data[0].createTime.getDate);
+        for(let i = 0; i< data.length;i++) {
+             
+          if(data[i].easyLike.indexOf(_openid) === -1) {
+            data[i].isLike = 'iconcanyu';
+          } else {
+            data[i].isLike = 'iconzhichi';
+          }
+        }
+        _that.setData({
+          homeList: data.reverse()
+        })
       }
     })
   }

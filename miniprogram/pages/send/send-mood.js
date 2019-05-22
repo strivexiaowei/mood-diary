@@ -152,9 +152,11 @@ Page({
   sendMood() {
     let _that = this;
     if(_that.data.sendFlag) {
-      _that.data.sendFlag = true;
       return;
     }
+    _that.setData({
+      sendFlag: true
+    })
     mood.add({
       data: {
         touristsNickname: _that.data.userInfo.nickName,
@@ -163,7 +165,7 @@ Page({
         location: _that.data.address,
         brandImgList: _that.data.brandImgList,
         saySome: _that.data.saySome,
-        createTime: db.serverDate(), //添加该字段
+        createTime: (new Date()).getTime(), //添加该字段
         easyLike: []
       },
       success(res) {

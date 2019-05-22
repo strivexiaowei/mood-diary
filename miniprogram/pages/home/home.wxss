@@ -101,6 +101,11 @@ page {
 
 .cart-link .easy-like .icon-like {
   font-size: 38rpx;
+  color: #666;
+}
+
+.cart-link .easy-like .iconzhichi {
+  color: red;
 }
 
 .home-add-mood {
