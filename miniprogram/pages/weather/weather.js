@@ -13,7 +13,6 @@ Page({
     var that = this;
     that.getLocation();
   },
-
   //获取经纬度方法
   getLocation: function () {
     var that = this

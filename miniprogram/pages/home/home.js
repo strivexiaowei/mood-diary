@@ -15,7 +15,11 @@ Page({
     ],
     homeList: [],
     openid: '',
-    easyFlag: false
+    easyFlag: false,
+    isLoadMore: true,
+    total: 0,  // 总共多少条
+    limit: 10, // 每次返回10条
+    skip: 0    //当前页
   },
   dayClick: function (event) {
     let clickDay = event.detail.day;
@@ -30,7 +34,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+  
   },
 
   /**
@@ -43,20 +47,23 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
-    // wx.cloud.callFunction({
-    //   name: 'orderby',
-    //   data: {},
-    //   success: res => {
-    //     console.log(res, 'hehehehehe')
-    //   }
-    // })
+   
     let _that = this;
+    mood.where({}).count({
+      success: res => {
+        _that.setData({
+          total: res.total
+        })
+      }
+    });
     let openid = wx.getStorageSync('_openid');
     _that.setData({
       openid
     })
-    _that.queryHomeList({});
+    _that.queryHomeList({
+      limit: 10,
+      skip: 0
+    });
   },
 
   /**
@@ -119,7 +126,15 @@ Page({
    * 滚动到底部
    */
   scrollBottom() {
-    console.log('hehe')
+    let { total, limit, skip } = this.data;
+    console.log(total, limit, skip)
+    if (total / limit > skip + 1) {
+      this.queryHomeList({ limit, skip: skip + 1});
+    } else {
+      this.setData({
+        isLoadMore: false
+      })
+    }
   },
   easyLike(e) {
     let { _id, index } = e.currentTarget.dataset;
@@ -196,21 +211,22 @@ Page({
   queryHomeList(obj) {
     let _that = this;
     let _openid = _that.data.openid;
-    mood.where(obj).get({
+    let homeList = _that.data.homeList
+    console.log(homeList)
+    wx.cloud.callFunction({
+      name: 'orderby',
+      data: obj,
       success(res) {
-        console.log(res);
-        let { data } = res;
-       console.log(data[0].createTime.getDate);
-        for(let i = 0; i< data.length;i++) {
-             
-          if(data[i].easyLike.indexOf(_openid) === -1) {
+        let { data } = res.result;
+        for (let i = 0; i < data.length; i++) {
+          if (data[i].easyLike.indexOf(_openid) === -1) {
             data[i].isLike = 'iconcanyu';
           } else {
             data[i].isLike = 'iconzhichi';
           }
         }
         _that.setData({
-          homeList: data.reverse()
+          homeList: [...homeList,...data]
         })
       }
     })

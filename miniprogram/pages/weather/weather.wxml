@@ -28,11 +28,11 @@
 </view>
  
  
-<view wx:for="{{daily_forecast}}" wx:for-index="i" wx:for-item="item">
+<view wx:for="{{daily_forecast}}" wx:for-index="i" wx:key="{{i}}" wx:for-item="item">
   <view class="hor forcast">
     <view class="center">{{day[i]}}</view>
     <view class="hor">
-      <image class="img" src="../../assets/icons/{{item.cond.code_d}}.png"></image>
+      <image class="img" src="../../images/{{item.cond.code_d}}.png"></image>
       <view class="center">{{item.cond.txt_d}}|{{qlty}}</view>
     </view>
     <view class="center">{{item.tmp.min}}°/ {{item.tmp.max}}°</view>

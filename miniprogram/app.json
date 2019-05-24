@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/weather/weather",
     "pages/home/home",
+    "pages/weather/weather",
     "pages/send/send-mood",
     "pages/login/login",
     "pages/user/user",

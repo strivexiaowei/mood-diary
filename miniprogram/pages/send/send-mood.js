@@ -95,11 +95,13 @@ Page({
         const arrFile = res.tempFilePaths
         arrFile.forEach((e, i) => {
           const cloudPath = e.replace('wxfile://', '');
+          console.log(cloudPath);
           wx.cloud.uploadFile({
             cloudPath,
             filePath: e,
             success: res => {
               let { statusCode, fileID } = res;
+              console.log(fileID);
               if (statusCode === 200) {
                 wx.cloud.callFunction({
                   name: 'getvideo',

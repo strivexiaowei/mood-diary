@@ -135,3 +135,18 @@ page {
   font-size: 50rpx;
   color: #fff;
 }
+
+.footer {
+  font-size: 24rpx;
+  text-align: center;
+  background-color: #fff;
+}
+
+.footer-int {
+  padding: 10rpx;
+  display: inline-block;
+}
+
+.loading {
+  font-size: 28rpx;
+}

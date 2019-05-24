@@ -28,8 +28,9 @@
       </view>
     </view>
   </view>
-  <view class='footer' style='height: 200rpx;'>
-  
+  <view class='footer'>
+   <text class='footer-int' wx:if="{{ isLoadMore }}"><text class='iconfont iconjiazai loading'></text> 正在加载</text>
+   <text class='footer-int' wx:else>没有更多动态了</text>
   </view>
 </scroll-view>
 
