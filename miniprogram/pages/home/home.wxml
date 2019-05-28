@@ -1,10 +1,10 @@
 <!--pages/home/home.wxml-->
 <wxs src="../../utils/getDateDiff.wxs" module="getDateDiff" />
-<scroll-view class='home-y' style="height: 100%;"  scroll-y bindscrolltolower='scrollBottom' lower-threshold="100">
+<scroll-view class='home-y' style="height: 100%;" scroll-y bindscrolltolower='scrollBottom' lower-threshold="100">
   <view class='calender-wrap'>
-    <calendar calendar-style="calendar" header-style="calendar-header" board-style="calendar-board" days-color="{{dayStyle}}"   weeks-type="cn" binddayClick="dayClick" />
+    <calendar calendar-style="calendar" header-style="calendar-header" board-style="calendar-board" days-color="{{dayStyle}}" weeks-type="cn" binddayClick="dayClick" />
   </view>
-  <view wx:for="{{ homeList }}" wx:key="{{ item._id }}" wx:for-index="j" class="card-wrap">
+  <view class='init' wx:for="{{ homeList }}" wx:key="{{ item._id }}" wx:for-index="j" class="card-wrap" animation="{{item.animation}}">
     <view class="cart-link clearfix">
       <view class='fl user-wrap'>
         <image mode="aspectFill" class='user-log' src='{{ item.touristsHead }}'></image>
@@ -29,8 +29,8 @@
     </view>
   </view>
   <view class='footer'>
-   <text class='footer-int' wx:if="{{ isLoadMore }}"><text class='iconfont iconjiazai loading'></text> 正在加载</text>
-   <text class='footer-int' wx:else>没有更多动态了</text>
+    <text class='footer-int' wx:if="{{ isLoadMore }}"><text class='iconfont iconjiazai loading'></text> 正在加载</text>
+    <text class='footer-int' wx:else>没有更多动态了</text>
   </view>
 </scroll-view>
 

@@ -1,40 +1,183 @@
-<image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1558525133121&di=ead4b7416b983ebefb1f9e8a09356b08&imgtype=0&src=http%3A%2F%2Fcdn.moji002.com%2Fimages%2Fsimgs%2F2017%2F07%2F06%2F14992904410.15854600.1615_ios.jpg" class="bg"></image>
-<view class="container">
-  <view class="nowWeather">
-    <view class="city w">{{city}} {{district}}</view>
-    <view class="road w">{{street}}</view>
-    <view class="temp w b">{{tmp}}°</view>
-    <view class="weather w">{{txt}} | 空气 {{qlty}}</view>
-  </view>
- 
-  <view class="weahterDetail">
-    <view class="">
-      <view class="w center">{{dir}}</view>
-      <view wx:if="{{sc == '微风'}}" class="w b center f50">微风</view>
-      <view wx:else class="w b center f50">{{sc}}级</view>
+<!-- index.wxml -->
+<view class="container" style='background: url({{bgImgUrl}}) center -200rpx / 100% no-repeat #62aadc;'>
+    <view style='margin-top: -150rpx; padding-top: 150rpx;background: rgba(52,73,94, {{apl}})'>
+      <view class='animation-view'>
+        <view class='location' bind:tap="chooseLocation">
+          <myicon class="icon" type="dingwei"></myicon>
+          <text class='city'>{{position}}</text>
+        </view>
+        <canvas canvas-id='animation' style='width:100%;height:920rpx;position: absolute;top:100rpx'></canvas>
+        <view class="center-container">
+          <view class="flex-content-left">
+            <view class="pm-number-view">
+              <text style="display:inline-block;width: 8rpx;border:8rpx solid {{airQuality.color}};border-radius: 6rpx;height: 22rpx;margin-right:12rpx;box-sizing:border-box"></text>
+              <text style="line-height: 60rpx;font-size:26rpx;color:white">{{airQuality.airText}} {{airQuality.aqi}}</text>
+            </view>
+            <view class="today-weather-view">
+              <text style="text-align:center;font-size:32rpx;color:white;height:50rpx">
+              今 天
+            </text>
+              <text style="text-align:center;font-size:32rpx;color:white">
+              {{todayData.dateTxt}}
+            </text>
+              <view style="text-align:center;color:white">
+                <myicon class="icon" style="color: white; font-size:32rpx" type="{{todayData.iconTypeBai}}"></myicon>
+                <text style='font-size:32rpx'>{{todayData.tmp_min}}/{{todayData.tmp_max}}</text>
+              </view>
+            </view>
+          </view>
+          <view class="flex-content-center">
+            <view class="temp-out-content">
+              <text class="today-temp">{{liveWeather.fl}}</text>
+              <text class="temp-symbol">℃</text>
+            </view>
+            <myicon class="icon" type="{{liveWeather.iconType}}"></myicon>
+            <text class="today-temp-bottom">{{liveWeather.cond_txt}}</text>
+            <view class="temp-out-content__bottom">
+              <view class="flex-center__left">
+                <text class="home-text ">湿度: {{liveWeather.hum}}%</text>
+                <text class="home-text">风力：{{liveWeather.wind_sc}}级</text>
+              </view>
+              <view class="flex-center__right">
+                <view class="home-text out-scroll-text">
+                  <text class='scroll-text'>{{warmPrompt}}</text>
+                </view>
+
+              </view>
+            </view>
+          </view>
+          <view class="flex-content-right">
+            <view class="today-weather-view">
+              <text style="text-align:center;font-size:32rpx;color:white;height:50rpx">
+              明 天
+            </text>
+              <text style="text-align:center;font-size:32rpx;color:white">
+              {{tomorrowData.dateTxt}}
+            </text>
+              <view style="text-align:center;color:white">
+                <myicon class="icon" style="color: white;font-size:32rpx" type="{{tomorrowData.iconTypeBai}}"></myicon>
+                <text style='font-size:32rpx'>{{tomorrowData.tmp_min}}/{{tomorrowData.tmp_max}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="all-day-list">
+          <scroll-view class="scroll-view_x" scroll-x style="overflow:hidden;width:auto;height:100%">
+            <view class="all-day-list-item" wx:for="{{everyHourData}}" wx:key="item.time">
+              <view class="day-list-item">{{item.time}}点</view>
+              <view class="day-list-item">
+                <myicon style="color:white;font-size:36rpx" type="{{item.iconType}}"></myicon>
+              </view>
+              <view class="day-list-item">{{item.tmp}}°</view>
+            </view>
+          </scroll-view>
+        </view>
+      </view>
+
+      <view class="one-week-list">
+        <view class="one-week-list-item" wx:for="{{everyWeekData}}" wx:key="item.weekday">
+          <view class="week-list-item" style="font-size: 28rpx">
+            <view>{{item.weekday}}</view>
+            <view>{{item.date}}</view>
+          </view>
+          <view class="week-list-item">{{item.cond_txt_d}}</view>
+          <view class="week-list-item">
+            <myicon style="color:white;font-size:44rpx" type="{{item.iconTypeBai}}"></myicon>
+          </view>
+          <view class="week-list-item">{{item.tmp_min}}~{{item.tmp_max}}°</view>
+          <view class="week-list-item">
+            <myicon style="color:white;font-size:44rpx" type="{{item.iconTypeYe}}"></myicon>
+          </view>
+          <view class="week-list-item">{{item.cond_txt_n}}</view>
+          <view class="week-list-item" style="font-size: 28rpx">
+            <view>{{item.wind_dir == '无持续风向' ? '无' : item.wind_dir}}</view>
+            <view>{{item.wind_sc}}级</view>
+          </view>
+        </view>
+
+      </view>
+
+      <view class='live-index-view'>
+        <view class='live-index-item'>
+          <view class='live-index-item-left'>
+            <view class='live-index-top-txt'>
+              <text>日出</text>
+            </view>
+            <view class='live-index-bottom-txt'>
+              <text>{{todayData.sr}}</text>
+            </view>
+          </view>
+          <view class='live-index-item-right'>
+            <view class='live-index-top-txt'>
+              <text>日落</text>
+            </view>
+            <view class='live-index-bottom-txt'>
+              <text>{{todayData.ss}}</text>
+            </view>
+          </view>
+        </view>
+        <view class='live-index-item'>
+          <view class='live-index-item-left'>
+            <view class='live-index-top-txt'>
+              <text>降雨概率</text>
+            </view>
+            <view class='live-index-bottom-txt'>
+              <text>{{todayData.pop}}%</text>
+            </view>
+          </view>
+          <view class='live-index-item-right'>
+            <view class='live-index-top-txt'>
+              <text>风向角度</text>
+            </view>
+            <view class='live-index-bottom-txt'>
+              <text>{{todayData.wind_deg}}°</text>
+            </view>
+          </view>
+        </view>
+        <view class='live-index-item'>
+          <view class='live-index-item-left'>
+            <view class='live-index-top-txt'>
+              <text>风速</text>
+            </view>
+            <view class='live-index-bottom-txt'>
+              <text>{{todayData.wind_spd}} <text style='font-size: 28rpx'>公里/小时</text></text>
+            </view>
+          </view>
+          <view class='live-index-item-right'>
+            <view class='live-index-top-txt'>
+              <text>能见度</text>
+            </view>
+            <view class='live-index-bottom-txt'>
+              <text>{{todayData.vis}} <text style='font-size: 28rpx'>公里</text></text>
+            </view>
+          </view>
+        </view>
+        <view class='live-index-item'>
+          <view class='live-index-item-left'>
+            <view class='live-index-top-txt'>
+              <text>月升时间</text>
+            </view>
+            <view class='live-index-bottom-txt'>
+              <text>{{todayData.mr}}</text>
+            </view>
+          </view>
+          <view class='live-index-item-right'>
+            <view class='live-index-top-txt'>
+              <text>月落时间</text>
+            </view>
+            <view class='live-index-bottom-txt'>
+              <text>{{todayData.ms}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class='last-view'>
+        <view class='last-view-item' wx:for="{{lifeStyle}}" wx:key="item.type">
+          <view class='last-view-item-top'>{{lifeEnum[item.type]}}</view>
+          <view class='last-view-item-bottom'>{{item.brf}}</view>
+        </view>
+      </view>
     </view>
-    <view class="l"></view>
-    <view class="">
-      <view class="w center">相对湿度</view>
-      <view class="w b center f50">{{hum}}%</view>
-    </view>
-    <view class="l"></view>
-    <view class="">
-      <view class="w center">体感温度</view>
-      <view class="w b center f50">{{fl}}°</view>
-    </view>
-  </view>
- 
-</view>
- 
- 
-<view wx:for="{{daily_forecast}}" wx:for-index="i" wx:key="{{i}}" wx:for-item="item">
-  <view class="hor forcast">
-    <view class="center">{{day[i]}}</view>
-    <view class="hor">
-      <image class="img" src="../../images/{{item.cond.code_d}}.png"></image>
-      <view class="center">{{item.cond.txt_d}}|{{qlty}}</view>
-    </view>
-    <view class="center">{{item.tmp.min}}°/ {{item.tmp.max}}°</view>
-  </view>
+  <!-- </scroll-view> -->
 </view>

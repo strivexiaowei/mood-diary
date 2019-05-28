@@ -150,3 +150,8 @@ page {
 .loading {
   font-size: 28rpx;
 }
+
+.init {
+  opacity: 0;
+  transform: translateY(-80px);
+}

@@ -6,6 +6,7 @@
     "pages/login/login",
     "pages/user/user",
     "pages/index/index",
+    "pages/live/live",
     "pages/userConsole/userConsole",
     "pages/storageConsole/storageConsole",
     "pages/databaseGuide/databaseGuide",
@@ -35,6 +36,12 @@
         "text": "天气",
         "iconPath": "./images/weather1.png",
         "selectedIconPath": "./images/weather.png"
+      },
+      {
+        "pagePath": "pages/live/live",
+        "text": "视频",
+        "iconPath": "./images/bofang1.png",
+        "selectedIconPath": "./images/bofang.png"
       },
       {
         "pagePath": "pages/user/user",
